@@ -38,6 +38,14 @@ app.get('/all-blogs', (req, res) => {
         .catch((error) => console.log(error));
 })
 
+app.get('/single-blog', (req, res) => {
+    Blog.findById("60c353a83619f491333d6c76")
+        .then((result) => {
+            res.send(result);
+        })
+        .catch((error) => console.log(error));
+})
+
 app.get('/', (req, res) => {
     const blogs = [
         {title: 'Yoshi finds eggs', snippet: 'Lorem ipsum dolor sit amet consectetur'},
