@@ -2,6 +2,7 @@ const express = require('express');
 const morgan  = require('morgan');
 const mongoose = require('mongoose');
 const Blog = require('./models/blog');
+const { render } = require('ejs');
 
 const app = express();
 
@@ -44,6 +45,12 @@ app.post('/blogs', (req, res) => {
         .catch((error) => console.log(error));
 })
 
+app.get('/blogs/:id', (req, res) => {
+    const id = req.params.id;
+    Blog.findById(id).then((result) => {
+        res.render('details', {blog: result, title: 'Blog Details'})
+    })
+})
 
 app.get('/blogs/create', (req, res) => {
     res.render('create', {title: 'Create Blog'})
